@@ -1,107 +1,267 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Integrated Multi-Agentic AI</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Integrated Multi-Agentic AI: Biofisika • Nano-Tek • Ocean Science • Physical Intelligence" />
+  <title>🧠 Integrated Multi-Agentic AI</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'ai-blue': '#1D4ED8',
+            'ai-teal': '#0D9488',
+            'ai-dark': '#0F172A',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    body { font-family: 'Inter', sans-serif; }
-    .chat-bubble { max-width: 80%; margin-bottom: 1rem; padding: 0.75rem 1rem; border-radius: 1rem; }
-    .user { background-color: #3B82F6; color: white; margin-left: auto; }
-    .ai { background-color: #E5E7EB; color: #1F2937; margin-right: auto; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 50%, #f0fdfa 100%);
+    }
+    .dark body {
+      background: #0F172A;
+    }
+    .chat-bubble {
+      max-width: 85%;
+      padding: 1rem 1.25rem;
+      border-radius: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .user { background-color: #1D4ED8; color: white; margin-left: auto; }
+    .ai { 
+      background-color: #f1f5f9; 
+      color: #0f172a; 
+      margin-right: auto; 
+      border-left: 4px solid #0D9488;
+    }
+    .dark .ai { background-color: #1e293b; color: #e2e8f0; }
+    .source-link {
+      font-size: 0.8rem; 
+      color: #0D9488; 
+      text-decoration: underline;
+      margin-top: 0.5rem;
+    }
+    .dark .source-link { color: #2dd4bf; }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .voice-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: #0D9488; color: white; border: none; border-radius: 50%;
+      cursor: pointer; transition: 0.2s;
+    }
+    .voice-btn:hover { transform: scale(1.1); background: #14b8a6; }
+    .dark .voice-btn { background: #14b8a6; }
+    .upload-btn {
+      padding: 0.5rem 1rem; background: #e2e8f0; color: #1e293b;
+      border: 1px solid #cbd5e1; border-radius: 0.5rem; cursor: pointer;
+    }
+    .dark .upload-btn { background: #334155; color: #e2e8f0; border-color: #475569; }
   </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-teal-50 min-h-screen flex flex-col">
+<body class="min-h-screen transition-colors duration-300">
 
   <!-- Login Screen -->
-  <div id="loginScreen" class="flex flex-col items-center justify-center flex-1 p-6">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">🔐 Masuk ke Sistem AI</h1>
-      <form id="loginForm" class="space-y-4">
+  <div id="loginScreen" class="flex flex-col items-center justify-center min-h-screen p-6 bg-opacity-80">
+    <div class="bg-white dark:bg-ai-dark p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 mx-auto bg-gradient-to-r from-ai-blue to-ai-teal rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">AI</div>
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">🔐 Masuk ke Sistem</h1>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Akses ke Integrated Multi-Agentic Intelligence</p>
+      </div>
+
+      <form id="loginForm" class="space-y-5">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
           <input type="text" id="username" required
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ai-teal focus:outline-none transition"/>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
           <input type="password" id="password" required
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ai-teal focus:outline-none transition"/>
         </div>
         <button type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
-          Masuk
+          class="w-full bg-gradient-to-r from-ai-blue to-ai-teal hover:from-blue-700 hover:to-teal-700 text-white font-semibold py-3 rounded-xl transition transform hover:scale-105">
+          Masuk ke Sistem AI
         </button>
       </form>
-      <p id="loginError" class="text-red-500 text-sm mt-3 hidden">Username atau password salah.</p>
+      <p id="loginError" class="text-red-500 text-sm mt-3 hidden text-center">Username atau password salah.</p>
     </div>
   </div>
 
   <!-- Chat Interface -->
-  <div id="chatScreen" class="hidden flex-1 flex-col max-w-4xl w-full mx-auto p-4">
-    <header class="text-center py-4">
-      <h1 class="text-3xl font-bold text-gray-800">🧠 Integrated Multi-Agentic AI</h1>
-      <p class="text-gray-600">Biofisika • Nano-Tek • Ocean Science • Physical Intelligence</p>
+  <div id="chatScreen" class="hidden flex-col h-screen max-w-5xl w-full mx-auto">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-ai-dark shadow-sm border-b dark:border-gray-700 p-4 transition-colors duration-300">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-ai-blue dark:text-ai-teal">🧠 Integrated Multi-Agentic AI</h1>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Biofisika • Nano-Tek • Ocean Science • Physical Intelligence
+          </p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button id="darkModeToggle" class="text-gray-600 dark:text-gray-300 hover:text-ai-blue dark:hover:text-ai-teal">
+            <i data-feather="moon" class="w-5 h-5"></i>
+          </button>
+          <button id="logoutBtn" class="text-sm bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:text-red-200 text-red-700 px-3 py-1 rounded-lg transition">
+            Keluar
+          </button>
+        </div>
+      </div>
     </header>
 
-    <div id="chat" class="flex-1 p-4 overflow-y-auto space-y-2">
-      <div class="text-center text-gray-500 text-sm">Mulai obrolan dengan AI untuk eksplorasi multidisiplin...</div>
+    <!-- Chat Body -->
+    <div id="chat" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50 dark:bg-ai-dark transition-colors duration-300">
+      <div class="text-center text-gray-500 dark:text-gray-400 text-sm italic">
+        Selamat datang! Tanyakan apapun tentang Biofisika, Nanoteknologi, Ilmu Kelautan, atau AI Fisik.
+      </div>
     </div>
 
-    <div class="p-4 border-t">
-      <div class="flex space-x-2">
-        <input
-          id="userInput"
-          type="text"
-          placeholder="Tanyakan sesuatu tentang Biofisika, Nano-Tek, Lautan, atau AI..."
-          class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-          onkeyup="handleKeyPress(event)"
-        />
-        <button
-          onclick="sendMessage()"
-          class="bg-teal-600 hover:bg-teal-700 text-white font-medium px-6 py-2 rounded-lg transition">
-          Kirim
-        </button>
+    <!-- Input Area -->
+    <div class="p-4 bg-white dark:bg-ai-dark border-t dark:border-gray-700 transition-colors duration-300">
+      <div class="flex flex-col space-y-2">
+        <div class="flex space-x-2">
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Tanya tentang struktur protein, sensor nano, arus laut, atau AI hemat energi..."
+            class="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ai-teal focus:outline-none"
+            onkeyup="handleKeyPress(event)"
+          />
+          <button onclick="sendMessage()" class="bg-ai-teal hover:bg-teal-700 text-white font-medium px-5 py-3 rounded-xl transition">
+            <i data-feather="send" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="flex space-x-2 items-center text-sm text-gray-600 dark:text-gray-400">
+          <button onclick="startVoiceInput()" class="voice-btn" title="Input suara">
+            <i data-feather="mic" class="w-4 h-4"></i>
+          </button>
+          <label class="upload-btn flex items-center space-x-1">
+            <i data-feather="upload" class="w-4 h-4"></i>
+            <span>Unggah Data</span>
+            <input type="file" id="fileUpload" accept=".txt,.csv,.json" class="hidden" onchange="handleFileUpload(this)">
+          </label>
+          <span class="ml-auto">Mode: <strong>Multi-Agentic Fusion</strong></span>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
-    // Simple login
+    // Dark Mode
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      feather.replace();
+    });
+
+    // Login
     document.getElementById('loginForm').onsubmit = function(e) {
       e.preventDefault();
       const user = document.getElementById('username').value;
       const pass = document.getElementById('password').value;
 
-      if (user === 'admin' && pass === 'ai4future') {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('chatScreen').classList.remove('hidden');
+      if ((user === 'admin' && pass === 'ai4future') || (user === 'guest' && pass === 'ocean2025')) {
+        localStorage.setItem('isLoggedIn', 'true');
+        showChat();
       } else {
         document.getElementById('loginError').classList.remove('hidden');
       }
     };
 
-    // Send message to Vercel backend
+    function showChat() {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('chatScreen').classList.remove('hidden');
+      setTimeout(() => {
+        appendMessage("Halo! Saya adalah Integrated Multi-Agentic AI yang mengintegrasikan Biofisika, Nanoteknologi, Ilmu Kelautan, dan Physical Intelligence. Apa yang bisa saya bantu hari ini?", 'ai');
+      }, 300);
+    }
+
+    // Logout
+    document.getElementById('logoutBtn').onclick = () => {
+      localStorage.removeItem('isLoggedIn');
+      location.reload();
+    };
+
+    // Cek login saat reload
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      showChat();
+    }
+
+    // Voice Input
+    function startVoiceInput() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'id-ID';
+      recognition.interimResults = false;
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        document.getElementById('userInput').value = event.results[0][0].transcript;
+      };
+    }
+
+    // File Upload
+    function handleFileUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result.substring(0, 200);
+        appendMessage(`📁 File "${file.name}" diunggah. Konten: ${content}...`, 'user');
+        appendMessage(`Terima kasih. Data dari ${file.name} sedang dianalisis dengan AI agen khusus...`, 'ai');
+      };
+      reader.readAsText(file);
+    }
+
+    // Send Message
     async function sendMessage() {
       const input = document.getElementById('userInput');
       const msg = input.value.trim();
       if (!msg) return;
 
-      // Tampilkan pesan user
       appendMessage(msg, 'user');
       input.value = '';
 
-      // Kirim ke backend
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg })
-      });
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg })
+        });
 
-      const data = await response.json();
-      appendMessage(data.reply, 'ai');
+        const data = await response.json();
+        appendMessage(data.reply, 'ai');
+      } catch (error) {
+        appendMessage("Maaf, terjadi kesalahan koneksi.", 'ai');
+      }
     }
 
     function handleKeyPress(e) {
@@ -114,8 +274,13 @@
       bubble.className = `chat-bubble ${sender}`;
       bubble.innerText = text;
       chat.appendChild(bubble);
+
+      // Auto-scroll
       chat.scrollTop = chat.scrollHeight;
     }
+
+    // Inisialisasi Feather Icons
+    feather.replace();
   </script>
 </body>
 </html>
