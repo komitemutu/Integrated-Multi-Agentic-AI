@@ -235,34 +235,65 @@
       margin: 0 auto 1rem;
       box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
     }
+    .login-input {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(0, 217, 255, 0.5);
+      color: white;
+    }
+    .login-input:focus {
+      border-color: #00d9ff;
+      box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.3);
+    }
   </style>
 </head>
 <body class="min-h-screen text-white transition-colors duration-300 tron-grid">
   <!-- Login Screen -->
-  <div id="loginScreen" class="flex flex-col items-center justify-center min-h-screen p-6 bg-opacity-80">
-    <div class="bg-gray-900 bg-opacity-80 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-tron-blue neon-border transition-colors duration-300">
+  <div id="loginScreen" class="flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="bg-gray-900 bg-opacity-80 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-tron-blue neon-border">
       <div class="text-center mb-6">
         <div class="w-16 h-16 mx-auto bg-gradient-to-r from-tron-blue to-tron-purple rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4 animate-pulse-slow">AI</div>
         <h1 class="text-2xl font-bold text-white neon-glow">🔐 Masuk ke Sistem</h1>
         <p class="text-tron-cyan text-sm">Akses ke Integrated Multi-Agentic Intelligence</p>
       </div>
+      
+      <!-- Login Form -->
       <form id="loginForm" class="space-y-5">
         <div>
           <label class="block text-sm font-medium text-tron-cyan mb-1">Username</label>
           <input type="text" id="username" required
-            class="w-full px-4 py-3 bg-gray-800 bg-opacity-70 border border-tron-blue rounded-xl text-white focus:ring-2 focus:ring-tron-cyan focus:outline-none transition"/>
+            class="w-full px-4 py-3 login-input rounded-xl focus:outline-none transition"/>
         </div>
         <div>
           <label class="block text-sm font-medium text-tron-cyan mb-1">Password</label>
           <input type="password" id="password" required
-            class="w-full px-4 py-3 bg-gray-800 bg-opacity-70 border border-tron-blue rounded-xl text-white focus:ring-2 focus:ring-tron-cyan focus:outline-none transition"/>
+            class="w-full px-4 py-3 login-input rounded-xl focus:outline-none transition"/>
         </div>
         <button type="submit"
           class="w-full neon-button font-semibold py-3 rounded-xl transition transform hover:scale-105">
           Masuk ke Sistem AI
         </button>
       </form>
-      <p id="loginError" class="text-red-400 text-sm mt-3 hidden text-center">Username atau password salah.</p>
+      
+      <!-- Error Message -->
+      <div id="loginError" class="hidden mt-4 p-3 bg-red-900 bg-opacity-50 rounded-lg text-red-300 text-sm">
+        Username atau password salah.
+      </div>
+      
+      <!-- Demo Credentials -->
+      <div class="mt-6 p-4 bg-gray-800 bg-opacity-50 rounded-lg">
+        <p class="text-tron-cyan text-sm font-medium mb-2">Demo Credentials:</p>
+        <div class="text-xs space-y-1">
+          <p><span class="text-white">Admin:</span> admin / ai4future</p>
+          <p><span class="text-white">Guest:</span> guest / ocean2025</p>
+        </div>
+      </div>
+      
+      <!-- Direct Access Button -->
+      <div class="mt-4 text-center">
+        <button id="directAccessBtn" class="text-xs text-tron-cyan hover:text-white underline">
+          Atau masuk sebagai demo user
+        </button>
+      </div>
     </div>
   </div>
   
@@ -397,70 +428,175 @@
     let animationId;
     let currentArtifact = 'protein';
     
-    // Dark Mode
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      const icon = darkModeToggle.querySelector('i');
-      if (body.classList.contains('dark')) {
-        icon.setAttribute('data-feather', 'sun');
-      } else {
-        icon.setAttribute('data-feather', 'moon');
+    // Initialize app
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is already logged in
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+        showMainInterface();
       }
+      
+      // Setup login form
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          handleLogin();
+        });
+      }
+      
+      // Setup direct access button
+      const directAccessBtn = document.getElementById('directAccessBtn');
+      if (directAccessBtn) {
+        directAccessBtn.addEventListener('click', function() {
+          // Auto-fill guest credentials
+          document.getElementById('username').value = 'guest';
+          document.getElementById('password').value = 'ocean2025';
+          handleLogin();
+        });
+      }
+      
+      // Setup logout button
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          localStorage.removeItem('isLoggedIn');
+          location.reload();
+        });
+      }
+      
+      // Setup dark mode toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark');
+          const icon = darkModeToggle.querySelector('i');
+          if (document.body.classList.contains('dark')) {
+            icon.setAttribute('data-feather', 'sun');
+          } else {
+            icon.setAttribute('data-feather', 'moon');
+          }
+          feather.replace();
+        });
+      }
+      
+      // Setup tabs
+      const chatTab = document.getElementById('chatTab');
+      const simulationTab = document.getElementById('simulationTab');
+      
+      if (chatTab) {
+        chatTab.addEventListener('click', function() {
+          showChatInterface();
+        });
+      }
+      
+      if (simulationTab) {
+        simulationTab.addEventListener('click', function() {
+          showSimulationInterface();
+        });
+      }
+      
+      // Initialize feather icons
       feather.replace();
     });
     
-    // Login
-    document.getElementById('loginForm').onsubmit = function(e) {
-      e.preventDefault();
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-      if ((user === 'admin' && pass === 'ai4future') || (user === 'guest' && pass === 'ocean2025')) {
+    // Handle login
+    function handleLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const loginError = document.getElementById('loginError');
+      
+      // Reset error message
+      if (loginError) {
+        loginError.classList.add('hidden');
+      }
+      
+      // Validate credentials
+      if ((username === 'admin' && password === 'ai4future') || 
+          (username === 'guest' && password === 'ocean2025')) {
+        // Set login state
         localStorage.setItem('isLoggedIn', 'true');
+        
+        // Show main interface
         showMainInterface();
       } else {
-        document.getElementById('loginError').classList.remove('hidden');
+        // Show error message
+        if (loginError) {
+          loginError.classList.remove('hidden');
+        }
       }
-    };
+    }
     
+    // Show main interface
     function showMainInterface() {
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('mainInterface').classList.remove('hidden');
-      setTimeout(() => {
-        appendMessage("Halo! Saya adalah Integrated Multi-Agentic AI yang mengintegrasikan Biofisika, Nanoteknologi, Ilmu Kelautan, dan Physical Intelligence. Apa yang bisa saya bantu hari ini?", 'ai');
-      }, 300);
+      const loginScreen = document.getElementById('loginScreen');
+      const mainInterface = document.getElementById('mainInterface');
+      
+      if (loginScreen) {
+        loginScreen.classList.add('hidden');
+      }
+      
+      if (mainInterface) {
+        mainInterface.classList.remove('hidden');
+        mainInterface.classList.add('flex');
+        
+        // Show welcome message
+        setTimeout(() => {
+          appendMessage("Halo! Saya adalah Integrated Multi-Agentic AI yang mengintegrasikan Biofisika, Nanoteknologi, Ilmu Kelautan, dan Physical Intelligence. Apa yang bisa saya bantu hari ini?", 'ai');
+        }, 300);
+      }
     }
     
-    // Logout
-    document.getElementById('logoutBtn').onclick = () => {
-      localStorage.removeItem('isLoggedIn');
-      location.reload();
-    };
-    
-    // Cek login saat reload
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      showMainInterface();
-    }
-    
-    // Tab Navigation
-    document.getElementById('chatTab').addEventListener('click', () => {
-      document.getElementById('chatInterface').classList.remove('hidden');
-      document.getElementById('simulationInterface').classList.add('hidden');
-      document.getElementById('chatTab').classList.add('tab-active');
-      document.getElementById('simulationTab').classList.remove('tab-active');
+    // Show chat interface
+    function showChatInterface() {
+      const chatInterface = document.getElementById('chatInterface');
+      const simulationInterface = document.getElementById('simulationInterface');
+      const chatTab = document.getElementById('chatTab');
+      const simulationTab = document.getElementById('simulationTab');
+      
+      if (chatInterface) {
+        chatInterface.classList.remove('hidden');
+      }
+      
+      if (simulationInterface) {
+        simulationInterface.classList.add('hidden');
+      }
+      
+      if (chatTab) {
+        chatTab.classList.add('tab-active');
+      }
+      
+      if (simulationTab) {
+        simulationTab.classList.remove('tab-active');
+      }
       
       // Stop simulation when switching to chat
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
-    });
+    }
     
-    document.getElementById('simulationTab').addEventListener('click', () => {
-      document.getElementById('chatInterface').classList.add('hidden');
-      document.getElementById('simulationInterface').classList.remove('hidden');
-      document.getElementById('chatTab').classList.remove('tab-active');
-      document.getElementById('simulationTab').classList.add('tab-active');
+    // Show simulation interface
+    function showSimulationInterface() {
+      const chatInterface = document.getElementById('chatInterface');
+      const simulationInterface = document.getElementById('simulationInterface');
+      const chatTab = document.getElementById('chatTab');
+      const simulationTab = document.getElementById('simulationTab');
+      
+      if (chatInterface) {
+        chatInterface.classList.add('hidden');
+      }
+      
+      if (simulationInterface) {
+        simulationInterface.classList.remove('hidden');
+      }
+      
+      if (chatTab) {
+        chatTab.classList.remove('tab-active');
+      }
+      
+      if (simulationTab) {
+        simulationTab.classList.add('tab-active');
+      }
       
       // Initialize or resume simulation
       if (!scene) {
@@ -468,7 +604,7 @@
       } else {
         animate();
       }
-    });
+    }
     
     // Voice Input
     function startVoiceInput() {
@@ -558,6 +694,8 @@
     
     function appendMessage(text, sender) {
       const chat = document.getElementById('chat');
+      if (!chat) return;
+      
       const bubble = document.createElement('div');
       bubble.className = `chat-bubble ${sender}`;
       
@@ -578,6 +716,8 @@
     
     function showTypingIndicator() {
       const chat = document.getElementById('chat');
+      if (!chat) return;
+      
       const indicator = document.createElement('div');
       indicator.id = 'typingIndicator';
       indicator.className = 'typing-indicator';
@@ -600,6 +740,8 @@
     // 3D Simulation Functions
     function initSimulation() {
       const container = document.getElementById('simulationCanvas');
+      if (!container) return;
+      
       const width = container.clientWidth;
       const height = container.clientHeight;
       
@@ -650,13 +792,17 @@
     }
     
     function createGrid() {
+      if (!scene) return;
+      
       const gridHelper = new THREE.GridHelper(100, 30, 0x00d9ff, 0x00d9ff);
-      (gridHelper.material as THREE.Material).opacity = 0.2;
-      (gridHelper.material as THREE.Material).transparent = true;
+      gridHelper.material.opacity = 0.2;
+      gridHelper.material.transparent = true;
       scene.add(gridHelper);
     }
     
     function createArtifact(type) {
+      if (!scene) return;
+      
       // Clear previous artifacts
       simulationObjects.forEach(obj => {
         scene.remove(obj);
@@ -683,6 +829,8 @@
     }
     
     function createProteinStructure() {
+      if (!scene) return;
+      
       const group = new THREE.Group();
       
       // Create a helix structure representing protein
@@ -727,6 +875,8 @@
     }
     
     function createNanoSensor() {
+      if (!scene) return;
+      
       const group = new THREE.Group();
       
       // Create a complex geometric structure
@@ -767,6 +917,8 @@
     }
     
     function createOceanCurrent() {
+      if (!scene) return;
+      
       const group = new THREE.Group();
       
       // Create flowing particles representing ocean current
@@ -818,6 +970,8 @@
     }
     
     function createNeuralNetwork() {
+      if (!scene) return;
+      
       const group = new THREE.Group();
       
       // Create nodes
@@ -870,6 +1024,7 @@
     
     function updateArtifactInfo(type) {
       const infoContainer = document.getElementById('artifactInfo');
+      if (!infoContainer) return;
       
       const artifactData = {
         protein: {
@@ -911,31 +1066,44 @@
     
     function setupSimulationControls() {
       // Speed control
-      document.getElementById('speedControl').addEventListener('input', (e) => {
-        // This will be used in the animation loop
-      });
+      const speedControl = document.getElementById('speedControl');
+      if (speedControl) {
+        speedControl.addEventListener('input', (e) => {
+          // This will be used in the animation loop
+        });
+      }
       
       // Artifact type
-      document.getElementById('artifactType').addEventListener('change', (e) => {
-        currentArtifact = e.target.value;
-        createArtifact(currentArtifact);
-      });
+      const artifactType = document.getElementById('artifactType');
+      if (artifactType) {
+        artifactType.addEventListener('change', (e) => {
+          currentArtifact = e.target.value;
+          createArtifact(currentArtifact);
+        });
+      }
       
       // Grid density
-      document.getElementById('gridDensity').addEventListener('input', (e) => {
-        // Update grid density (implementation would require recreating the grid)
-      });
+      const gridDensity = document.getElementById('gridDensity');
+      if (gridDensity) {
+        gridDensity.addEventListener('input', (e) => {
+          // Update grid density (implementation would require recreating the grid)
+        });
+      }
       
       // Reset simulation
-      document.getElementById('resetSimulation').addEventListener('click', () => {
-        createArtifact(currentArtifact);
-      });
+      const resetSimulation = document.getElementById('resetSimulation');
+      if (resetSimulation) {
+        resetSimulation.addEventListener('click', () => {
+          createArtifact(currentArtifact);
+        });
+      }
     }
     
     function animate() {
       animationId = requestAnimationFrame(animate);
       
-      const speed = parseFloat(document.getElementById('speedControl').value);
+      const speedControl = document.getElementById('speedControl');
+      const speed = speedControl ? parseFloat(speedControl.value) : 1;
       
       // Rotate artifacts
       simulationObjects.forEach(obj => {
@@ -943,12 +1111,19 @@
         obj.rotation.y += 0.01 * speed;
       });
       
-      controls.update();
-      renderer.render(scene, camera);
+      if (controls) {
+        controls.update();
+      }
+      
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
     }
     
     function onWindowResize() {
       const container = document.getElementById('simulationCanvas');
+      if (!container || !camera || !renderer) return;
+      
       const width = container.clientWidth;
       const height = container.clientHeight;
       
@@ -956,9 +1131,6 @@
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     }
-    
-    // Inisialisasi Feather Icons
-    feather.replace();
   </script>
 </body>
 </html>
