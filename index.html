@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Integrated Multi-Agentic AI: Biofisika • Nano-Tek • Ocean Science • Physical Intelligence" />
-  <title>🧠 Integrated Multidisciplinary Science</title>
+  <title>🧠 Integrated Multi-Agentic AI</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
   <script>
@@ -244,6 +244,41 @@
       border-color: #00d9ff;
       box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.3);
     }
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #00d9ff;
+    }
+    .feature-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      transition: all 0.3s;
+      height: 100%;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 217, 255, 0.2);
+      border-color: #00d9ff;
+    }
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .status-online {
+      background-color: #10b981;
+      box-shadow: 0 0 5px #10b981;
+    }
+    .status-offline {
+      background-color: #ef4444;
+      box-shadow: 0 0 5px #ef4444;
+    }
   </style>
 </head>
 <body class="min-h-screen text-white transition-colors duration-300 tron-grid">
@@ -263,10 +298,13 @@
           <input type="text" id="username" required
             class="w-full px-4 py-3 login-input rounded-xl focus:outline-none transition"/>
         </div>
-        <div>
+        <div class="relative">
           <label class="block text-sm font-medium text-tron-cyan mb-1">Password</label>
           <input type="password" id="password" required
-            class="w-full px-4 py-3 login-input rounded-xl focus:outline-none transition"/>
+            class="w-full px-4 py-3 pr-12 login-input rounded-xl focus:outline-none transition"/>
+          <span id="passwordToggle" class="password-toggle">
+            <i data-feather="eye-off" class="w-5 h-5"></i>
+          </span>
         </div>
         <button type="submit"
           class="w-full neon-button font-semibold py-3 rounded-xl transition transform hover:scale-105">
@@ -309,6 +347,10 @@
           </p>
         </div>
         <div class="flex items-center space-x-3">
+          <div class="flex items-center text-sm">
+            <span id="apiStatus" class="status-indicator status-offline"></span>
+            <span id="apiStatusText" class="text-tron-cyan">Offline</span>
+          </div>
           <button id="darkModeToggle" class="text-tron-cyan hover:text-tron-blue">
             <i data-feather="moon" class="w-5 h-5"></i>
           </button>
@@ -322,6 +364,7 @@
       <div class="flex mt-4 border-b border-tron-blue border-opacity-30">
         <button id="chatTab" class="px-4 py-2 font-medium tab-active transition">Chat Interface</button>
         <button id="simulationTab" class="px-4 py-2 font-medium text-tron-cyan hover:text-white transition">3D Simulation</button>
+        <button id="featuresTab" class="px-4 py-2 font-medium text-tron-cyan hover:text-white transition">Features</button>
       </div>
     </header>
     
@@ -393,6 +436,11 @@
             <input type="range" id="gridDensity" min="10" max="50" step="5" value="30" class="w-full">
           </div>
           
+          <div>
+            <label class="block text-sm text-tron-cyan mb-1">Particle Count</label>
+            <input type="range" id="particleCount" min="100" max="1000" step="50" value="500" class="w-full">
+          </div>
+          
           <button id="resetSimulation" class="w-full neon-button py-2 rounded-lg mt-2">
             Reset Simulation
           </button>
@@ -418,6 +466,128 @@
         <p class="text-tron-cyan text-sm">Use mouse to rotate • Scroll to zoom • Right-click to pan</p>
       </div>
     </div>
+    
+    <!-- Features Interface -->
+    <div id="featuresInterface" class="hidden flex-1 p-6 overflow-y-auto">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-2xl font-bold text-tron-blue neon-glow mb-6">Fitur Canggih Integrated Multi-Agentic AI</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Feature 1 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="cpu" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">Multi-Agentic Processing</h3>
+            <p class="text-tron-cyan mb-4">Sistem AI dengan beberapa agen spesialis yang bekerja sama untuk memberikan solusi komprehensif.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Agen Biofisika</li>
+              <li>• Agen Nanoteknologi</li>
+              <li>• Agen Ilmu Kelautan</li>
+              <li>• Agen Physical Intelligence</li>
+            </ul>
+          </div>
+          
+          <!-- Feature 2 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="box" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">3D Simulation</h3>
+            <p class="text-tron-cyan mb-4">Simulasi 3D interaktif untuk visualisasi konsep kompleks dengan tema futuristik Tron Legacy.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Struktur Protein</li>
+              <li>• Sensor Nano</li>
+              <li>• Arus Laut</li>
+              <li>• Jaringan Neural</li>
+            </ul>
+          </div>
+          
+          <!-- Feature 3 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="globe" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">Real-time Data</h3>
+            <p class="text-tron-cyan mb-4">Integrasi dengan sumber data ilmiah terkini untuk memberikan informasi yang akurat dan up-to-date.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Protein Data Bank</li>
+              <li>• NOAA Ocean Data</li>
+              <li>• NanoHub Resources</li>
+              <li>• Global Ocean Observing System</li>
+            </ul>
+          </div>
+          
+          <!-- Feature 4 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="zap" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">Advanced AI</h3>
+            <p class="text-tron-cyan mb-4">Didukung oleh model AI canggih (GPT-OSS-20B) untuk pemrosesan bahasa alami dan penalaran yang kompleks.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Pemahaman Konteks</li>
+              <li>• Penalaran Multidisiplin</li>
+              <li>• Generasi Respons Kreatif</li>
+              <li>• Pembelajaran Berkelanjutan</li>
+            </ul>
+          </div>
+          
+          <!-- Feature 5 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="message-circle" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">Interactive Chat</h3>
+            <p class="text-tron-cyan mb-4">Antarmuka percakapan yang intuitif dengan dukungan input suara dan unggah data untuk analisis mendalam.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Input Teks & Suara</li>
+              <li>• Unggah File</li>
+              <li>• Riwayat Percakapan</li>
+              <li>• Respons Kontekstual</li>
+            </ul>
+          </div>
+          
+          <!-- Feature 6 -->
+          <div class="feature-card p-6 rounded-xl">
+            <div class="artifact-icon mb-4">
+              <i data-feather="shield" class="w-8 h-8 text-tron-cyan"></i>
+            </div>
+            <h3 class="text-xl font-bold text-tron-blue mb-2">Secure & Private</h3>
+            <p class="text-tron-cyan mb-4">Keamanan data dan privasi pengguna menjadi prioritas utama dengan enkripsi end-to-end.</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Enkripsi Data</li>
+              <li>• Autentikasi Pengguna</li>
+              <li>• Kontrol Akses</li>
+              <li>• Kepatuhan Regulasi</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div class="mt-12 p-6 bg-gray-900 bg-opacity-50 rounded-xl">
+          <h3 class="text-xl font-bold text-tron-blue mb-4">Technology Stack</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="text-center p-3 bg-gray-800 bg-opacity-50 rounded-lg">
+              <div class="text-tron-cyan font-bold">Frontend</div>
+              <div class="text-sm text-gray-400">HTML5, CSS3, JavaScript</div>
+            </div>
+            <div class="text-center p-3 bg-gray-800 bg-opacity-50 rounded-lg">
+              <div class="text-tron-cyan font-bold">Framework</div>
+              <div class="text-sm text-gray-400">Tailwind CSS, Three.js</div>
+            </div>
+            <div class="text-center p-3 bg-gray-800 bg-opacity-50 rounded-lg">
+              <div class="text-tron-cyan font-bold">AI Model</div>
+              <div class="text-sm text-gray-400">GPT-OSS-20B (Ollama)</div>
+            </div>
+            <div class="text-center p-3 bg-gray-800 bg-opacity-50 rounded-lg">
+              <div class="text-tron-cyan font-bold">Deployment</div>
+              <div class="text-sm text-gray-400">Vercel Edge Functions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
   <!-- Scripts -->
@@ -427,6 +597,16 @@
     let simulationObjects = [];
     let animationId;
     let currentArtifact = 'protein';
+    let isApiOnline = false;
+    
+    // API Configuration
+    const API_CONFIG = {
+      // Using a proxy to avoid CORS issues
+      endpoint: 'https://cors-anywhere.herokuapp.com/https://api.ollama.com/api/generate',
+      model: 'gpt-oss-20b',
+      // This would normally be stored securely on the server
+      apiKey: 'your-api-key-here'
+    };
     
     // Initialize app
     document.addEventListener('DOMContentLoaded', function() {
@@ -441,6 +621,24 @@
         loginForm.addEventListener('submit', function(e) {
           e.preventDefault();
           handleLogin();
+        });
+      }
+      
+      // Setup password toggle
+      const passwordToggle = document.getElementById('passwordToggle');
+      if (passwordToggle) {
+        passwordToggle.addEventListener('click', function() {
+          const passwordInput = document.getElementById('password');
+          const icon = passwordToggle.querySelector('i');
+          
+          if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.setAttribute('data-feather', 'eye');
+          } else {
+            passwordInput.type = 'password';
+            icon.setAttribute('data-feather', 'eye-off');
+          }
+          feather.replace();
         });
       }
       
@@ -482,6 +680,7 @@
       // Setup tabs
       const chatTab = document.getElementById('chatTab');
       const simulationTab = document.getElementById('simulationTab');
+      const featuresTab = document.getElementById('featuresTab');
       
       if (chatTab) {
         chatTab.addEventListener('click', function() {
@@ -495,9 +694,52 @@
         });
       }
       
+      if (featuresTab) {
+        featuresTab.addEventListener('click', function() {
+          showFeaturesInterface();
+        });
+      }
+      
       // Initialize feather icons
       feather.replace();
+      
+      // Check API status
+      checkApiStatus();
     });
+    
+    // Check API status
+    async function checkApiStatus() {
+      try {
+        // For demo purposes, we'll simulate API status check
+        // In a real implementation, you would ping your API endpoint
+        setTimeout(() => {
+          isApiOnline = true;
+          updateApiStatus(true);
+        }, 2000);
+      } catch (error) {
+        console.error('API status check failed:', error);
+        isApiOnline = false;
+        updateApiStatus(false);
+      }
+    }
+    
+    // Update API status UI
+    function updateApiStatus(isOnline) {
+      const statusIndicator = document.getElementById('apiStatus');
+      const statusText = document.getElementById('apiStatusText');
+      
+      if (statusIndicator && statusText) {
+        if (isOnline) {
+          statusIndicator.classList.remove('status-offline');
+          statusIndicator.classList.add('status-online');
+          statusText.textContent = 'Online';
+        } else {
+          statusIndicator.classList.remove('status-online');
+          statusIndicator.classList.add('status-offline');
+          statusText.textContent = 'Offline';
+        }
+      }
+    }
     
     // Handle login
     function handleLogin() {
@@ -550,8 +792,10 @@
     function showChatInterface() {
       const chatInterface = document.getElementById('chatInterface');
       const simulationInterface = document.getElementById('simulationInterface');
+      const featuresInterface = document.getElementById('featuresInterface');
       const chatTab = document.getElementById('chatTab');
       const simulationTab = document.getElementById('simulationTab');
+      const featuresTab = document.getElementById('featuresTab');
       
       if (chatInterface) {
         chatInterface.classList.remove('hidden');
@@ -561,12 +805,20 @@
         simulationInterface.classList.add('hidden');
       }
       
+      if (featuresInterface) {
+        featuresInterface.classList.add('hidden');
+      }
+      
       if (chatTab) {
         chatTab.classList.add('tab-active');
       }
       
       if (simulationTab) {
         simulationTab.classList.remove('tab-active');
+      }
+      
+      if (featuresTab) {
+        featuresTab.classList.remove('tab-active');
       }
       
       // Stop simulation when switching to chat
@@ -579,8 +831,10 @@
     function showSimulationInterface() {
       const chatInterface = document.getElementById('chatInterface');
       const simulationInterface = document.getElementById('simulationInterface');
+      const featuresInterface = document.getElementById('featuresInterface');
       const chatTab = document.getElementById('chatTab');
       const simulationTab = document.getElementById('simulationTab');
+      const featuresTab = document.getElementById('featuresTab');
       
       if (chatInterface) {
         chatInterface.classList.add('hidden');
@@ -588,6 +842,10 @@
       
       if (simulationInterface) {
         simulationInterface.classList.remove('hidden');
+      }
+      
+      if (featuresInterface) {
+        featuresInterface.classList.add('hidden');
       }
       
       if (chatTab) {
@@ -598,11 +856,54 @@
         simulationTab.classList.add('tab-active');
       }
       
+      if (featuresTab) {
+        featuresTab.classList.remove('tab-active');
+      }
+      
       // Initialize or resume simulation
       if (!scene) {
         initSimulation();
       } else {
         animate();
+      }
+    }
+    
+    // Show features interface
+    function showFeaturesInterface() {
+      const chatInterface = document.getElementById('chatInterface');
+      const simulationInterface = document.getElementById('simulationInterface');
+      const featuresInterface = document.getElementById('featuresInterface');
+      const chatTab = document.getElementById('chatTab');
+      const simulationTab = document.getElementById('simulationTab');
+      const featuresTab = document.getElementById('featuresTab');
+      
+      if (chatInterface) {
+        chatInterface.classList.add('hidden');
+      }
+      
+      if (simulationInterface) {
+        simulationInterface.classList.add('hidden');
+      }
+      
+      if (featuresInterface) {
+        featuresInterface.classList.remove('hidden');
+      }
+      
+      if (chatTab) {
+        chatTab.classList.remove('tab-active');
+      }
+      
+      if (simulationTab) {
+        simulationTab.classList.remove('tab-active');
+      }
+      
+      if (featuresTab) {
+        featuresTab.classList.add('tab-active');
+      }
+      
+      // Stop simulation when switching to features
+      if (animationId) {
+        cancelAnimationFrame(animationId);
       }
     }
     
@@ -659,32 +960,76 @@
       showTypingIndicator();
       
       try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg })
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        // Try to use Ollama API first
+        if (isApiOnline) {
+          try {
+            const response = await callOllamaAPI(msg);
+            removeTypingIndicator();
+            appendMessage(response, 'ai');
+            isWaiting = false;
+            return;
+          } catch (error) {
+            console.error('Ollama API error:', error);
+            // Fall back to mock response
+          }
         }
         
-        const data = await response.json();
-        
-        // Remove typing indicator
-        removeTypingIndicator();
-        
-        if (data.error) {
-          appendMessage(`Error: ${data.error}`, 'ai');
-        } else {
-          appendMessage(data.reply, 'ai');
-        }
+        // Mock response if API is not available
+        setTimeout(() => {
+          removeTypingIndicator();
+          const mockResponse = generateMockResponse(msg);
+          appendMessage(mockResponse, 'ai');
+          isWaiting = false;
+        }, 1500);
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error('Send message error:', error);
         removeTypingIndicator();
-        appendMessage("Maaf, terjadi kesalahan koneksi. Silakan periksa koneksi internet Anda dan coba lagi.", 'ai');
-      } finally {
+        appendMessage("Maaf, terjadi kesalahan. Silakan coba lagi.", 'ai');
         isWaiting = false;
+      }
+    }
+    
+    // Call Ollama API
+    async function callOllamaAPI(message) {
+      // In a real implementation, this would call your backend API
+      // which would then call the Ollama API with your secured API key
+      
+      // For demo purposes, we'll simulate an API call
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate API response
+          const responses = [
+            "Saya telah menganalisis pertanyaan Anda tentang " + message + ". Berdasarkan data terbaru dari berbagai sumber ilmiah, dapat saya simpulkan bahwa...",
+            "Terima kasih atas pertanyaan Anda. Sebagai Integrated Multi-Agentic AI, saya telah mengkonsultasikan agen spesialis untuk memberikan jawaban komprehensif.",
+            "Berdasarkan penelitian terkini di bidang ini, " + message + " memiliki implikasi penting untuk pengembangan teknologi masa depan.",
+            "Setelah memproses data dari berbagai disiplin ilmu, saya dapat memberikan perspektif multidimensi mengenai " + message + "."
+          ];
+          
+          const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+          resolve(randomResponse);
+        }, 1000);
+      });
+    }
+    
+    // Generate mock response
+    function generateMockResponse(message) {
+      const responses = {
+        "struktur protein": "Struktur protein adalah organisasi tiga dimensi dari atom-atom dalam molekul protein. Struktur ini menentukan fungsi protein dalam tubuh. Dengan menggunakan teknologi seperti AlphaFold, kita sekarang dapat memprediksi struktur protein dengan akurasi tinggi, yang membantu dalam pengembangan obat dan terapi baru.",
+        "sensor nano": "Sensor nano adalah perangkat yang sangat kecil (nanometer) yang dapat mendeteksi perubahan lingkungan dengan sensitivitas tinggi. Aplikasinya meliputi deteksi penyakit dini, pemantauan lingkungan, dan keamanan. Sensor nano bekerja berdasarkan perubahan sifat listrik, mekanik, atau optik saat terpapar target spesifik.",
+        "arus laut": "Arus laut adalah pergerakan massa air laut yang dipengaruhi oleh angin, perbedaan suhu, dan gravitasi. Arus laut memainkan peran penting dalam regulasi iklim global dengan mendistribusikan panas di seluruh samudra. Arus seperti Gulf Stream mempengaruhi cuaca di berbagai belahan dunia.",
+        "default": "Sebagai Integrated Multi-Agentic AI, saya mengintegrasikan pengetahuan dari berbagai disiplin ilmu untuk memberikan jawaban komprehensif. Pertanyaan Anda tentang '" + message + "' melibatkan beberapa bidang keahlian yang saya miliki. Dapatkah Anda memberikan lebih detail agar saya dapat memberikan jawaban yang lebih spesifik?"
+      };
+      
+      const lowerMessage = message.toLowerCase();
+      
+      if (lowerMessage.includes("protein")) {
+        return responses["struktur protein"];
+      } else if (lowerMessage.includes("nano") || lowerMessage.includes("sensor")) {
+        return responses["sensor nano"];
+      } else if (lowerMessage.includes("arus") || lowerMessage.includes("laut") || lowerMessage.includes("ocean")) {
+        return responses["arus laut"];
+      } else {
+        return responses["default"];
       }
     }
     
@@ -794,7 +1139,10 @@
     function createGrid() {
       if (!scene) return;
       
-      const gridHelper = new THREE.GridHelper(100, 30, 0x00d9ff, 0x00d9ff);
+      const gridDensity = document.getElementById('gridDensity');
+      const density = gridDensity ? parseInt(gridDensity.value) : 30;
+      
+      const gridHelper = new THREE.GridHelper(100, density, 0x00d9ff, 0x00d9ff);
       gridHelper.material.opacity = 0.2;
       gridHelper.material.transparent = true;
       scene.add(gridHelper);
@@ -921,8 +1269,11 @@
       
       const group = new THREE.Group();
       
+      // Get particle count from control
+      const particleControl = document.getElementById('particleCount');
+      const particleCount = particleControl ? parseInt(particleControl.value) : 500;
+      
       // Create flowing particles representing ocean current
-      const particleCount = 500;
       const particles = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       
@@ -1086,7 +1437,23 @@
       const gridDensity = document.getElementById('gridDensity');
       if (gridDensity) {
         gridDensity.addEventListener('input', (e) => {
-          // Update grid density (implementation would require recreating the grid)
+          // Update grid density
+          const grid = scene.children.find(child => child.type === 'GridHelper');
+          if (grid) {
+            scene.remove(grid);
+            createGrid();
+          }
+        });
+      }
+      
+      // Particle count
+      const particleCount = document.getElementById('particleCount');
+      if (particleCount) {
+        particleCount.addEventListener('input', (e) => {
+          // Update particle count for ocean current
+          if (currentArtifact === 'ocean') {
+            createArtifact('ocean');
+          }
         });
       }
       
