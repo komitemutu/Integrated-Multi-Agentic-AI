@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Integrated Multi-Agentic AI: Biofisika • Nano-Tek • Ocean Science • Physical Intelligence" />
   <title>🧠 Integrated Multi-Agentic AI</title>
-
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
   <script>
@@ -22,13 +21,10 @@
       }
     }
   </script>
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-
   <!-- Icons -->
   <script src="https://unpkg.com/feather-icons"></script>
-
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -44,19 +40,29 @@
       margin-bottom: 1rem;
       line-height: 1.5;
     }
-    .user { background-color: #1D4ED8; color: white; margin-left: auto; }
+    .user { 
+      background-color: #1D4ED8; 
+      color: white; 
+      margin-left: auto; 
+      border-bottom-right-radius: 0.5rem;
+    }
     .ai { 
       background-color: #f1f5f9; 
       color: #0f172a; 
       margin-right: auto; 
       border-left: 4px solid #0D9488;
+      border-bottom-left-radius: 0.5rem;
     }
-    .dark .ai { background-color: #1e293b; color: #e2e8f0; }
+    .dark .ai { 
+      background-color: #1e293b; 
+      color: #e2e8f0; 
+    }
     .source-link {
       font-size: 0.8rem; 
       color: #0D9488; 
       text-decoration: underline;
       margin-top: 0.5rem;
+      display: block;
     }
     .dark .source-link { color: #2dd4bf; }
     .pulse {
@@ -68,22 +74,91 @@
       100% { opacity: 0.6; }
     }
     .voice-btn {
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-      background: #0D9488; color: white; border: none; border-radius: 50%;
-      cursor: pointer; transition: 0.2s;
+      width: 36px; 
+      height: 36px;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      background: #0D9488; 
+      color: white; 
+      border: none; 
+      border-radius: 50%;
+      cursor: pointer; 
+      transition: 0.2s;
     }
-    .voice-btn:hover { transform: scale(1.1); background: #14b8a6; }
-    .dark .voice-btn { background: #14b8a6; }
+    .voice-btn:hover { 
+      transform: scale(1.1); 
+      background: #14b8a6; 
+    }
+    .dark .voice-btn { 
+      background: #14b8a6; 
+    }
     .upload-btn {
-      padding: 0.5rem 1rem; background: #e2e8f0; color: #1e293b;
-      border: 1px solid #cbd5e1; border-radius: 0.5rem; cursor: pointer;
+      padding: 0.5rem 1rem; 
+      background: #e2e8f0; 
+      color: #1e293b;
+      border: 1px solid #cbd5e1; 
+      border-radius: 0.5rem; 
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .dark .upload-btn { background: #334155; color: #e2e8f0; border-color: #475569; }
+    .dark .upload-btn { 
+      background: #334155; 
+      color: #e2e8f0; 
+      border-color: #475569; 
+    }
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: #f1f5f9;
+      border-radius: 1.5rem;
+      margin-right: auto;
+      border-left: 4px solid #0D9488;
+    }
+    .dark .typing-indicator {
+      background-color: #1e293b;
+    }
+    .typing-dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: #0D9488;
+      margin: 0 2px;
+      display: inline-block;
+      animation: typing 1.4s infinite;
+    }
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes typing {
+      0%, 60%, 100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-10px);
+      }
+    }
+    .error-message {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+      border-left: 4px solid #ef4444;
+    }
+    .dark .error-message {
+      background-color: #7f1d1d;
+      color: #fecaca;
+    }
   </style>
 </head>
 <body class="min-h-screen transition-colors duration-300">
-
   <!-- Login Screen -->
   <div id="loginScreen" class="flex flex-col items-center justify-center min-h-screen p-6 bg-opacity-80">
     <div class="bg-white dark:bg-ai-dark p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
@@ -92,7 +167,6 @@
         <h1 class="text-2xl font-bold text-gray-800 dark:text-white">🔐 Masuk ke Sistem</h1>
         <p class="text-gray-600 dark:text-gray-300 text-sm">Akses ke Integrated Multi-Agentic Intelligence</p>
       </div>
-
       <form id="loginForm" class="space-y-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
@@ -112,10 +186,9 @@
       <p id="loginError" class="text-red-500 text-sm mt-3 hidden text-center">Username atau password salah.</p>
     </div>
   </div>
-
+  
   <!-- Chat Interface -->
   <div id="chatScreen" class="hidden flex-col h-screen max-w-5xl w-full mx-auto">
-
     <!-- Header -->
     <header class="bg-white dark:bg-ai-dark shadow-sm border-b dark:border-gray-700 p-4 transition-colors duration-300">
       <div class="flex justify-between items-center">
@@ -135,14 +208,14 @@
         </div>
       </div>
     </header>
-
+    
     <!-- Chat Body -->
     <div id="chat" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50 dark:bg-ai-dark transition-colors duration-300">
       <div class="text-center text-gray-500 dark:text-gray-400 text-sm italic">
         Selamat datang! Tanyakan apapun tentang Biofisika, Nanoteknologi, Ilmu Kelautan, atau AI Fisik.
       </div>
     </div>
-
+    
     <!-- Input Area -->
     <div class="p-4 bg-white dark:bg-ai-dark border-t dark:border-gray-700 transition-colors duration-300">
       <div class="flex flex-col space-y-2">
@@ -162,7 +235,7 @@
           <button onclick="startVoiceInput()" class="voice-btn" title="Input suara">
             <i data-feather="mic" class="w-4 h-4"></i>
           </button>
-          <label class="upload-btn flex items-center space-x-1">
+          <label class="upload-btn">
             <i data-feather="upload" class="w-4 h-4"></i>
             <span>Unggah Data</span>
             <input type="file" id="fileUpload" accept=".txt,.csv,.json" class="hidden" onchange="handleFileUpload(this)">
@@ -172,7 +245,7 @@
       </div>
     </div>
   </div>
-
+  
   <!-- Scripts -->
   <script>
     // Dark Mode
@@ -180,15 +253,20 @@
     const body = document.body;
     darkModeToggle.addEventListener('click', () => {
       body.classList.toggle('dark');
+      const icon = darkModeToggle.querySelector('i');
+      if (body.classList.contains('dark')) {
+        icon.setAttribute('data-feather', 'sun');
+      } else {
+        icon.setAttribute('data-feather', 'moon');
+      }
       feather.replace();
     });
-
+    
     // Login
     document.getElementById('loginForm').onsubmit = function(e) {
       e.preventDefault();
       const user = document.getElementById('username').value;
       const pass = document.getElementById('password').value;
-
       if ((user === 'admin' && pass === 'ai4future') || (user === 'guest' && pass === 'ocean2025')) {
         localStorage.setItem('isLoggedIn', 'true');
         showChat();
@@ -196,7 +274,7 @@
         document.getElementById('loginError').classList.remove('hidden');
       }
     };
-
+    
     function showChat() {
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('chatScreen').classList.remove('hidden');
@@ -204,34 +282,44 @@
         appendMessage("Halo! Saya adalah Integrated Multi-Agentic AI yang mengintegrasikan Biofisika, Nanoteknologi, Ilmu Kelautan, dan Physical Intelligence. Apa yang bisa saya bantu hari ini?", 'ai');
       }, 300);
     }
-
+    
     // Logout
     document.getElementById('logoutBtn').onclick = () => {
       localStorage.removeItem('isLoggedIn');
       location.reload();
     };
-
+    
     // Cek login saat reload
     if (localStorage.getItem('isLoggedIn') === 'true') {
       showChat();
     }
-
+    
     // Voice Input
     function startVoiceInput() {
+      if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+        appendMessage("Maaf, browser Anda tidak mendukung input suara.", 'ai');
+        return;
+      }
+      
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'id-ID';
       recognition.interimResults = false;
       recognition.start();
-
+      
       recognition.onresult = (event) => {
         document.getElementById('userInput').value = event.results[0][0].transcript;
       };
+      
+      recognition.onerror = (event) => {
+        appendMessage("Terjadi kesalahan dalam pengenalan suara. Silakan coba lagi.", 'ai');
+      };
     }
-
+    
     // File Upload
     function handleFileUpload(input) {
       const file = input.files[0];
       if (!file) return;
+      
       const reader = new FileReader();
       reader.onload = function(e) {
         const content = e.target.result.substring(0, 200);
@@ -240,45 +328,99 @@
       };
       reader.readAsText(file);
     }
-
+    
     // Send Message
+    let isWaiting = false;
+    
     async function sendMessage() {
+      if (isWaiting) return;
+      
       const input = document.getElementById('userInput');
       const msg = input.value.trim();
       if (!msg) return;
-
+      
       appendMessage(msg, 'user');
       input.value = '';
-
+      isWaiting = true;
+      
+      // Show typing indicator
+      showTypingIndicator();
+      
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: msg })
         });
-
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
-        appendMessage(data.reply, 'ai');
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        if (data.error) {
+          appendMessage(`Error: ${data.error}`, 'ai');
+        } else {
+          appendMessage(data.reply, 'ai');
+        }
       } catch (error) {
-        appendMessage("Maaf, terjadi kesalahan koneksi.", 'ai');
+        console.error('Fetch error:', error);
+        removeTypingIndicator();
+        appendMessage("Maaf, terjadi kesalahan koneksi. Silakan periksa koneksi internet Anda dan coba lagi.", 'ai');
+      } finally {
+        isWaiting = false;
       }
     }
-
+    
     function handleKeyPress(e) {
       if (e.key === 'Enter') sendMessage();
     }
-
+    
     function appendMessage(text, sender) {
       const chat = document.getElementById('chat');
       const bubble = document.createElement('div');
       bubble.className = `chat-bubble ${sender}`;
-      bubble.innerText = text;
+      
+      // Process links in AI messages
+      if (sender === 'ai') {
+        // Simple link detection - replace URLs with actual links
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        text = text.replace(urlRegex, '<a href="$1" target="_blank" class="source-link">$1</a>');
+        bubble.innerHTML = text;
+      } else {
+        bubble.innerText = text;
+      }
+      
       chat.appendChild(bubble);
-
       // Auto-scroll
       chat.scrollTop = chat.scrollHeight;
     }
-
+    
+    function showTypingIndicator() {
+      const chat = document.getElementById('chat');
+      const indicator = document.createElement('div');
+      indicator.id = 'typingIndicator';
+      indicator.className = 'typing-indicator';
+      indicator.innerHTML = `
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      `;
+      chat.appendChild(indicator);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    
+    function removeTypingIndicator() {
+      const indicator = document.getElementById('typingIndicator');
+      if (indicator) {
+        indicator.remove();
+      }
+    }
+    
     // Inisialisasi Feather Icons
     feather.replace();
   </script>
